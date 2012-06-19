@@ -1,0 +1,6 @@
+<h1>
+  <%= current_user.name %>
+</h1>
+<span>
+  <%= pluralize(current_user.microposts.count, "micropost") %>
+</span>

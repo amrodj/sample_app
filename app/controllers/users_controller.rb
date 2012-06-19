@@ -1,9 +1,5 @@
 class UsersController < ApplicationController
 
-  def show
-    @user = User.find(params[:id])
-  end
-
   def new
     @user = User.new
   end
@@ -12,10 +8,15 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       sign_in @user
-      flash[:success] = "Welcome to the Back Channel App!"
+      flash[:success] = "Welcome to the Backchannel App!"
       redirect_to @user
     else
       render 'new'
     end
+  end
+
+  def show
+    @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
   end
 end

@@ -1,19 +1,38 @@
-<% provide(:title, "Sign in") %>
-<h1>Sign in</h1>
+<% if signed_in? %>
+    <div class="row">
+      <aside class="span4">
+        <section>
+          <%= render 'shared/user_info' %>
+        </section>
+        <section>
+          <%= render 'shared/micropost_form' %>
+        </section>
+      </aside>
+      <div class="span8">
+        <h3>Post Feed</h3>
+        <%= render 'shared/feed' %>
+      </div>
+    </div>
+<% else %>
+    <% provide(:title, "Sign in") %>
+        <h1>Sign in</h1>
+    <section>
+      <%= render 'shared/micropost_form' %>
+    </section>
+        <div class="row">
+          <div class="span6 offset3">
+            <%= form_for(:session, url: sessions_path) do |f| %>
 
-<div class="row">
-  <div class="span6 offset3">
-    <%= form_for(:session, url: sessions_path) do |f| %>
+                <%= f.label :email %>
+                <%= f.text_field :email %>
 
-        <%= f.label :email %>
-        <%= f.text_field :email %>
+                <%= f.label :password %>
+                <%= f.password_field :password %>
 
-        <%= f.label :password %>
-        <%= f.password_field :password %>
+                <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
+            <% end %>
 
-        <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
-    <% end %>
-
-    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
-  </div>
-</div>
+            <p>New user? <%= link_to "Sign up now, Yo!", signup_path %></p>
+          </div>
+        </div>
+<% end %>
