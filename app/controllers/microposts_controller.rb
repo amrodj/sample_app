@@ -2,8 +2,9 @@ class MicropostsController < ApplicationController
   before_filter :signed_in_user, only: [:create, :destroy]
   before_filter :correct_user, :admin_user, only: :destroy
 
-
-  def search
+  def index
+    @search = params[:search]
+    @microposts = Micropost.search(@search)
   end
 
   def create
