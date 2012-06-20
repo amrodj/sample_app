@@ -1,7 +1,7 @@
 class MicropostsController < ApplicationController
   before_filter :signed_in_user, only: [:create, :destroy]
-  before_filter :correct_user,   only: :destroy
-  before_filter :admin_user, only: [:destroy]
+  before_filter :correct_user, :admin_user, only: :destroy
+
 
   def search
   end
@@ -21,13 +21,15 @@ class MicropostsController < ApplicationController
 
   def destroy
     @micropost.destroy
+    flash[:success] = "Post deleted."
     redirect_to root_path
+
   end
 
   private
 
   def correct_user
-    @micropost = current_user.microposts.find_by_id(params[:id])
+    @micropost = Micropost.find_by_id(params[:id])
     ###
        allReplies = Reply.all
 
