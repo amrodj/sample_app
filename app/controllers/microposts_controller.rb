@@ -22,8 +22,7 @@ class MicropostsController < ApplicationController
   def destroy
     @micropost.destroy
     flash[:success] = "Post deleted."
-    redirect_to root_path
-
+    redirect_to @micropost.user(root_path)
   end
 
   private
@@ -39,6 +38,6 @@ class MicropostsController < ApplicationController
 
   def admin_user
     @micropost = Micropost.find_by_id(params[:id])
-    redirect_to(root_path) unless current_user.admin?
+    redirect_to(@micropost.user(root_path)) unless current_user.admin?
   end
 end
