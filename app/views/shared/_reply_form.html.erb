@@ -1,0 +1,8 @@
+<%= form_for(@reply) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <div class="field">
+      <%= f.text_area :content, placeholder: "Compose new reply to post..." %>
+    </div>
+    <input name="micropost_id" type="hidden" value="<%=@micropost_id%>" />
+    <%= f.submit "Post Reply", class: "btn btn-large btn-primary" %>
+<% end %>

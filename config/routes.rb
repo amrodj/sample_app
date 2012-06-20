@@ -1,7 +1,9 @@
 SampleApp::Application.routes.draw do
+
   resources :users
   resources :sessions,   only: [:new, :create, :destroy]
   resources :microposts, only: [:create, :destroy]
+  resources :replies
 
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'
@@ -10,6 +12,8 @@ SampleApp::Application.routes.draw do
   match '/help',    to: 'static_pages#help'
   match '/about',   to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'
+
+  match '/reply', to: 'replies#create'
 
   root to: 'sessions#new'
 
