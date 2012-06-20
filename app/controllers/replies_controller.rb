@@ -45,6 +45,16 @@ class RepliesController < ApplicationController
     @reply.micropost.replies.build()
 
     if @reply.save
+      post_record = Micropost.find(params[:micropost_id])
+
+      # keep a count of replies so we can order posts by popularity
+      if post_record.reply_cnt == nil
+        post_record.reply_cnt = 1
+      else
+        post_record.reply_cnt = post_record.reply_cnt + 1
+      end
+      post_record.save
+
       flash[:success] = "Reply created!"
       redirect_to root_path
     else
@@ -56,7 +66,6 @@ class RepliesController < ApplicationController
   # PUT /replies/1
   # PUT /replies/1.json
   def update
-    @var = "asdf"
     @reply = Reply.find(params[:id])
 
     respond_to do |format|

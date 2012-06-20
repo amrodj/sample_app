@@ -5,5 +5,5 @@ class Micropost < ActiveRecord::Base
 
   validates :user_id, presence: true
 
-  default_scope order: 'microposts.created_at DESC'
+  default_scope order: 'microposts.reply_cnt DESC'
 end
