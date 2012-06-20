@@ -1,0 +1,21 @@
+<% provide(:title, 'Search Results') %>
+<h1>Search Results</h1>
+
+<table>
+  <tr>
+
+    <th>Username</th>
+    <th>Content</th>
+
+  </tr>
+
+    <% for micropost in @microposts %>
+      <tr>
+        <td><%=h User.find(micropost.user_id).name %></td>
+        <td><%= micropost.content %></td>
+      </tr>
+      </tr>
+      <tr> <td bgcolor="#FFFAA" colspan="2"/> </tr>
+  <% end %>
+</table>
+
