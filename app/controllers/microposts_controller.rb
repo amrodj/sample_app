@@ -1,6 +1,7 @@
 class MicropostsController < ApplicationController
   before_filter :signed_in_user, only: [:create, :destroy]
   before_filter :correct_user,   only: :destroy
+  before_filter :admin_user, only: [:destroy]
 
   def search
   end
@@ -32,5 +33,10 @@ class MicropostsController < ApplicationController
 
     ###
     redirect_to root_path if @micropost.nil?
+  end
+
+  def admin_user
+    @micropost = Micropost.find_by_id(params[:id])
+    redirect_to(root_path) unless current_user.admin?
   end
 end
