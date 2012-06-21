@@ -3,7 +3,7 @@ namespace :db do
   task populate: :environment do
     User.create!(name: "Administrator",
                  email: "admin@ncsu.edu",
-                 password: "foobar",
+                 password: "123456",
                  password_confirmation: "foobar",
                  admin: true)
     10.times do |n|
