@@ -9,7 +9,7 @@ class Micropost < ActiveRecord::Base
 
   def self.search(search)
     if search
-      find(:all, :conditions => ['content LIKE ?', "%#{search}%"])
+      find(:all, :joins => :replies, :conditions => ['microposts.content LIKE ? OR replies.content LIKE ?', "%#{search}%", "%#{search}%"])
     else
       find(:all)
     end
