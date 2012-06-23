@@ -1,7 +1,15 @@
+
+
+
 <li>
 
   <%= link_to user.name, user %>
   <% if current_user.admin? && !current_user?(user) %>
+      <% if user.admin? %>
+        |  Admin
+      <% end %>
       | <%= link_to "delete", user, method: :delete, data: { confim: "You sure?" } %>
+      | <%= link_to 'Statistics', 'admin_statistics/index' %>
+      | <%= link_to 'Create Admin/User', 'admin_create_user/index' %>
   <% end %>
 </li>

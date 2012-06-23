@@ -14,6 +14,9 @@ SampleApp::Application.routes.draw do
   match '/contact', to: 'static_pages#contact'
 
   match '/reply', to: 'replies#create'
+  get "admin_statistics/index"
+  get "admin_create_user/index"
+  get "users/form_admin"
 
   root to: 'sessions#new'
 

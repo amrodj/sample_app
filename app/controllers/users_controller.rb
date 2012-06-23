@@ -11,9 +11,18 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      sign_in @user
-      flash[:success] = "Welcome to the Backchannel App!"
-      redirect_to @user
+      if :admin_user
+        if @user.admin?
+          flash[:success] = "Created Admin"
+        else
+          flash[:success] = "Created User"
+        end
+        redirect_to users_path
+      else
+        sign_in @user
+        flash[:success] = "Welcome to the Backchannel App!"
+        redirect_to @user
+      end
     else
       render 'new'
     end
